@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
+from .models import Profile
+from .forms import *
 
 # view functions created from here
 
@@ -30,31 +32,6 @@ def signup(request):
 def profile(request):
     return render(request, 'award/profile.html')
 
-def edit_profile(request, username):
-    current_user = request.user
-    if request.method == 'POST':
-        try:
-            profile = Profile.objects.get(user=current_user)
-            form = UpdateUserProfileForm(request.POST,instance=profile)
-            if form.is_valid():
-                profile = form.save(commit=False)
-                profile.user = current_user
-                profile.save()
-            return redirect('index')
-        except:
-            form = UpdateUserProfileForm(request.POST)
-            if form.is_valid():
-                profile = form.save(commit=False)
-                profile.user = current_user
-                profile.save()
-            return redirect('index')
-    else:
-        if Profile.objects.filter(user=current_user):
-            profile = Profile.objects.get(user=current_user)
-            form = UpdateUserProfileForm(instance=profile)
-        else:
-            form = UpdateUserProfileForm()
-    return render(request, 'award/update_profile.html', {'form': form} )
 
 def post(request):
     current_user = request.user
