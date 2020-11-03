@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'awwards',
     'bootstrap3',
-    'djangoratings',
+    # 'djangoratings',
     'crispy_forms',
     'rest_framework',
     'django_forms_bootstrap',
