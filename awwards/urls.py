@@ -3,7 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-app_name = 'gallery'
+app_name = 'awwards'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

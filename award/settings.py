@@ -74,7 +74,6 @@ INSTALLED_APPS = [
     'registration',
     # 'djangoratings',
     'crispy_forms',
-    'rest_framework',
     'django_forms_bootstrap',
 ]
 

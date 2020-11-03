@@ -10,7 +10,6 @@ django-crispy-forms==1.9.2
 django-forms-bootstrap==3.1.0
 django-heroku==0.3.1
 django-registration==2.4.1
-djangorestframework==3.12.1
 gunicorn==20.0.4
 idna==2.10
 importlib-metadata==1.7.0
