@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
-from django.shortcuts import render, redirect
 
+# view functions created from here
 
-@login_required(login_url='login')
 def index(request):
     return render(request, 'award/index.html')
 
-@login_required(login_url='login')
+
 def signup(request):
     form = SignUpForm(request.POST)
     if form.is_valid():
@@ -22,12 +22,14 @@ def signup(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('home')
+        return redirect('index')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-@login_required(login_url='login')
+def profile(request):
+    return render(request, 'award/profile.html')
+
 def edit_profile(request, username):
     current_user = request.user
     if request.method == 'POST':
@@ -54,7 +56,6 @@ def edit_profile(request, username):
             form = UpdateUserProfileForm()
     return render(request, 'award/update_profile.html', {'form': form} )
 
-@login_required(login_url='login')
 def post(request):
     current_user = request.user
     try:

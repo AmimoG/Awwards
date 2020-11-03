@@ -18,3 +18,24 @@ def update_profile_signal(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+    
+
+class Post(models.Model):
+    title = models.CharField(max_length=155)    
+    url = models.URLField(max_length=255)
+    description = models.TextField(max_length=255)
+    image = models.ImageField(upload_to='images/')      
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")    
+    
+    def __str__(self):
+        return f'{self.title}'
+
+    def delete_post(self):
+        self.delete()
+
+    @classmethod
+    def all_posts(cls):
+        return cls.objects.all()
+
+    def save_post(self):
+        self.save()
