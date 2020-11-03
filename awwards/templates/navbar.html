@@ -1,49 +1,14 @@
-{% load crispy_forms_tags %}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
-    {% if user.is_authenticated %}
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}"> <strong class="mr-4 brand"> City Life</strong></a>        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <form class="form-inline" method="get" action="">
-                        {% csrf_token %}
-                        <div class="md-form my-0">
-                            <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
-                        </div>
-                    </form>
-                </li>
-            </ul>
-            
-            <ul class="navbar-nav navbar-right">
-                {% if user.is_authenticated%}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" style="color:white; font-weight: bolder;"
-                       aria-haspopup="true"
-                       aria-expanded="false">{{ user.username|title }} 
-                    </a>
-                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="{% url 'profile'%}"> profile</a>
-                       
-                        <hr>
-                        <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
-
-
-                    </div>
-                </li>
-                {% else %}
-                <div class="item has-tablet" id="bt-submit"><a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a></div>
-                {% endif %}                
-                <!-- <div class="btn btn-info btn-sm" id="site"><a href="{% url 'upload'%}"></a>SUBMIT YOUR PROJECT</a>
-                </div> -->
-                {% if user.is_authenticated%}
-                <div class="item has-tablet" id="bt-submit"><a href="{% url 'upload'%}" class="submit btn btn-sm btn-info">SUBMIT</a></div>
-                          
-                {% endif %} 
-
-            </ul>
-        </div>
-    </div>
-    {% endif %}  
-</nav>
-
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <a class="navbar-brand text-white" href="/"><h3><strong>Nostalgia</strong></h3></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+        </ul>
+        <form class="form-inline my-2 my-md-0"  action="/search" role="search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Pictures" name="imagesearch" aria-label="Search">
+          <button class="btn btn-info btn-md my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav> -->
