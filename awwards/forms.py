@@ -1,22 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from .models import Profile, Image
 from django.contrib.auth.models import User
-from .models import *
-
+from django.contrib.auth.forms import UserCreationForm
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=100, help_text='Last Name')
-    last_name = forms.CharField(max_length=100, help_text='Last Name')
-    email = forms.EmailField(max_length=150, help_text='Email')
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=200)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name','email', 'password1', 'password2',)
+        fields = ('username', 'email', 'password1', 'password2', )
 
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        exclude = [ 'user', 'Author', 'pub_date', 'author_profile', 'neighborhood']
-        widgets = {
-          'post': forms.Textarea(attrs={'rows':2, 'cols':10,}),
-        }
+class AddPostForm(forms.ModelForm):
+  class Meta:
+    model = Image
+    exclude = ['name', 'author', 'date',]
+
+class SignUpForm(forms.ModelForm):
+  class Meta:
+    model = Profile
+    exclude = ['bio','profile_pic','profile_avatar','date']
