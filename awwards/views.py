@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
-from .models import Profile
+from .forms import SignUpForm, PostForm
+from .models import Profile, Post
+from django.http import HttpResponseRedirect
 from .forms import *
 
 # view functions created from here
