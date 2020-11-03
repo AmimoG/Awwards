@@ -1,77 +1,98 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from pyuploadcare.dj.models import ImageField
+import datetime as dt
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=50)
 
+class Neighborhood(models.Model):
+    name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    occupants_count = models.IntegerField()    
+    Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    
+        
+    def save_neighborhood(self):
+        self.save()
+    
+    def delete_neighborhood(self):
+        self.delete()
+        
+    @classmethod
+    def get_neighborhoods(cls):
+        projects = cls.objects.all()
+        return projects
+    
+    @classmethod
+    def search_neighborhoods(cls, search_term):
+        projects = cls.objects.filter(name__icontains=search_term)
+        return projects
+    
+    
+    @classmethod
+    def get_by_admin(cls, Admin):
+        projects = cls.objects.filter(Admin=Admin)
+        return projects
+    
+    
+    @classmethod
+    def get_neighborhood(request, neighborhood):
+        try:
+            project = Neighborhood.objects.get(pk = id)
+            
+        except ObjectDoesNotExist:
+            raise Http404()
+        
+        return project
+    
     def __str__(self):
         return self.name
-
-    def save_category(self):
-        self.save()
-
-    def delete_category(self):
-        self.delete()
+    
 
 
-class Location(models.Model):
-    name = models.CharField(max_length=60)
-
-    @classmethod
-    def get_locations(cls):
-        locations = Location.objects.all()
-        return locations
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    profile_picture = models.ImageField(upload_to='images/', default='default.png')
+    bio = models.TextField(max_length=500, default="My Bio", blank=True)
+    name = models.CharField(blank=True, max_length=120)
+    location = models.CharField(max_length=60, blank=True)
+    contact = models.EmailField(max_length=100, blank=True)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.user.username} Profile'
 
-    @classmethod
-    def update_location(cls, id, value):
-        cls.objects.filter(id=id).update(image=value)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
 
-    def save_location(self):
-        self.save()
-
-    def delete_location(self):
-        self.delete()
+    
 
 
-class Image(models.Model):
-    image = models.ImageField(upload_to='images/')
-    name = models.CharField(max_length=60)
-    description = models.TextField()
-    author = models.CharField(max_length=40, default='admin')
-    date = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    location = models.ManyToManyField(Location)
-
-    @classmethod
-    def filter_by_location(cls, location):
-        image_location = Image.objects.filter(location__name=location).all()
-        return image_location
-
-    @classmethod
-    def update_image(cls, id, value):
-        cls.objects.filter(id=id).update(image=value)
-
-    @classmethod
-    def get_image_by_id(cls, id):
-        image = cls.objects.filter(id=id).all()
-        return image
-
-    @classmethod
-    def search_by_category(cls, category):
-        images = cls.objects.filter(category__name__icontains=category)
-        return images
+class Post(models.Model):
+    title = models.CharField(max_length=155)    
+    description = models.TextField(max_length=255)      
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")    
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.title}'
 
-    def save_image(self):
-        self.save()
-
-    def delete_image(self):
+    def delete_post(self):
         self.delete()
 
-    class Meta:
-        ordering = ['date']
+    @classmethod
+    def search_project(cls, title):
+        return cls.objects.filter(title__icontains=title).all()
+
+    @classmethod
+    def all_posts(cls):
+        return cls.objects.all()
+
+    def save_post(self):
+        self.save()
+
+    

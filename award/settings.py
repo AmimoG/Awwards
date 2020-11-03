@@ -71,10 +71,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'awwards',
     'bootstrap3',
-    'registration',
-    # 'djangoratings',
+    'bootstrap4',
     'crispy_forms',
+    'rest_framework',
     'django_forms_bootstrap',
+    'django_static_jquery3',
+    'django_static_arrive',
+    'django_cascading_dropdown_widget',
 ]
 
 UPLOADCARE = {
@@ -106,6 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -158,6 +162,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

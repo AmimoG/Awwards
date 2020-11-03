@@ -1,14 +1,14 @@
-from django.conf.urls import url
+from django.urls import path, include
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+from rest_framework import routers
 
-app_name = 'awwards'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^search/', views.search_results, name='search'),
-    url(r'^location/(?P<location>\w+)/', views.image_location, name='location'),
+    path('', views.index, name='index'),
+    path('signup/', views.signup, name='signup'),
+    path('upload/', views.upload, name='upload'),
+    path('account/', include('django.contrib.auth.urls')),
+    path('<username>/profile', views.user_profile, name='userprofile'),    
+    path('profile/', views.profile, name='profile'),
+    path('profile/<username>/', views.edit_profile, name='edit_profile'),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
