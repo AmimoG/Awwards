@@ -33,12 +33,12 @@ def profile(request):
     return render(request, 'award/profile.html')
 
 
-def post(request):
+def upload(request):
     current_user = request.user
     try:
         profile = Profile.objects.get(user = current_user)
     except:
-        return redirect('edit_profile',username = current_user.username)
+        return redirect('index')
 
     try:
         posts = Post.objects.filter(neighborhood = profile.neighborhood)
@@ -56,4 +56,4 @@ def post(request):
     else:
         form = PostForm()
    
-    return render(request, 'award/post.html', {'posts': posts, 'form': form})
+    return render(request, 'award/upload.html', {'posts': posts, 'form': form})
