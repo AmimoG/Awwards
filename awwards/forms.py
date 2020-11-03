@@ -1,43 +1,29 @@
 from django import forms
-from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from crispy_forms.helper import FormHelper
+from .models import Profile,Project,Rating
 
 
-class NewNeighborhoodForm(forms.ModelForm):
-    class Meta:
-        model = Neighborhood
-        exclude = ['Admin', 'pub_date', 'admin_profile']
-            
+class RegistrationForm(UserCreationForm):
+  email = forms.EmailField()
 
-class UpdateUserProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        exclude = ['user']
-        widgets = {
-          'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
-        }
-        
-class UpdateUserForm(forms.ModelForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+  class Meta:
+    model = User
+    fields = ['username','email','password1','password2']
 
-    class Meta:
-        model = User
-        fields = ('username', 'email')
-          
-class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+class PostProjectsForm(forms.ModelForm):
+  class Meta:
+    model = Project
+    exclude = ['user']
+    widgets = {
+      'tag': forms.CheckboxSelectMultiple(),
+      'technologies':forms.CheckboxSelectMultiple()
+    }
 
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-        
-        
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        exclude = [ 'user', 'url', 'image', 'Author', 'pub_date', 'author_profile', 'neighborhood']
-        widgets = {
-          'post': forms.Textarea(attrs={'rows':2, 'cols':10,}),
-        }
+
+class ProjectRatingForm(forms.ModelForm):
+  class Meta:
+    model = Rating
+    exclude = ['user','project','vote_average']
+
+  
