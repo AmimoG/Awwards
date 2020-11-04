@@ -22,13 +22,6 @@ urlpatterns = [
     url(r'^api/profile/$', views.ProfileList.as_view()),
     url(r'api/profile/profile-id/(?P<pk>[0-9]+)/$',
         views.ProfileDescription.as_view()),
-    # ex: /
-    url(r'^$', views.review_list, name='review_list'),
-    # ex: /review/5/
-    url(r'^review/(?P<review_id>[0-9]+)/$',
-        views.review_detail, name='review_detail'),
-    # ex: /project/
-    url(r'^project$', views.project_list, name='project_list'),
 ]
 
 

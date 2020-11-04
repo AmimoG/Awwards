@@ -6,10 +6,16 @@ body {
   background-color: white;
 }
 
-#victor {
-  font-family: 'Dosis', sans-serif;"
-  font-size: 30px;
-}
+.jumbotron{
+scroll-behavior: smooth;
+ background-image:url(/static/images/landing.jpeg);
+ background-attachment:fixed;
+ background-repeat:no-repeat;
+ background-position:center;
+ background-size:cover;
+ }
+ 
+
 
 li {
   display: inline;
@@ -19,10 +25,6 @@ li a {
   padding: 20px;
 }
 
-#footer1 li {
-  padding: 10px;
-  font-size: 10px;
-}
 
 .itson {
   background-color: white;

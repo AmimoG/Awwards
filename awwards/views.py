@@ -175,26 +175,6 @@ def search_image(request):
             message = "You haven't searched for any image"
             return render(request, 'search.html', {"message": message})
 
-# def search_users(request):
-#
-#     # search for a user by their username
-#     if 'user' in request.GET and request.GET["user"]:
-#         search_term = request.GET.get("user")
-#         searched_users = Profile.search_users(search_term)
-#         message = f"{search_term}"
-#
-#         return render(request, 'search.html', {"message": message, "profiles": searched_users})
-#
-#     else:
-#         message = "You haven't searched for any person"
-#         return render(request, 'search.html', {"message": message})
-#
-# def user_review_list(request, username=None):
-#     if not username:
-#         username = request.user.username
-#     latest_review_list = Review.objects.filter(user_id=username).order_by('-comment')
-#     context = {'latest_review_list':latest_review_list, 'username':username}
-#     return render(request, 'user_review_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def individual_profile_page(request, username):
