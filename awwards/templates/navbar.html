@@ -1,66 +1,49 @@
-{% load static %}
-<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
+    {% if user.is_authenticated %}
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'homePage' %}"> <strong class="mr-4 brand"> Awwards</strong></a>        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <form class="form-inline" method="get" action="">
+                        {% csrf_token %}
+                        <div class="md-form my-0">
+                            <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav navbar-right">
+                {% if user.is_authenticated%}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" style="color:white; font-weight: bolder;"
+                       aria-haspopup="true"
+                       aria-expanded="false">{{ user.username|title }} 
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item text-center" href="{% url 'individual_profile_page' user.id %}"> profile</a>
+                        <hr>
+                        <a class="dropdown-item text-center" href="{%url 'edit_profile'%}"> Edit profile</a>
+                        <hr>
+                        <a href="/logout" class="text-secondary text-center dropdown-item">Log out</a>
+                        
 
-<nav class="navbar bg-light ">
-  <div class="container-fluid">
-    <div class="navbar-header">
-        
-      <a class="navbar-brand" id="victor" href="{% url 'homePage' %}">AWARDS
-      </a>
-    </div>
-    <div>
+
+                    </div>
+                </li>
+                {% else %}
+                <div class="item has-tablet" id="bt-submit"><a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a></div>
+                {% endif %}                
+          
+                {% if user.is_authenticated%}
+                <div class="item has-tablet" id="bt-submit"><a href="{%url 'new_project'%}" class="submit btn btn-sm btn-info">SUBMIT</a></div>
+                          
+                {% endif %} 
+
+            </ul>
         </div>
-    <div class="col-sm-6 col-md-6">
-      {% if user.is_authenticated %}
-
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a href="{%url 'edit_profile'%}">Edit Profile</a>
-      </li>
-
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a href="{% url 'individual_profile_page' user.id %}">My Profile</a>
-      </li>
-                   <li style="font-family: 'Dosis', sans-serif;">
-                    <a href="{%url 'new_project'%}">Submit Your Project</a>
-                  </li>
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a href="/accounts/password/change">Change Password</a>
-      </li>
-
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a href="/logout">Logout</a>
-      </li>
-
-      {% else %}
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a class='btn btn-default' href="/accounts/login">Login</a>
-      </li>
-
-      <li style="font-family: 'Dosis', sans-serif;">
-        <a class='btn btn-default' href="/accounts/register">Register</a>
-      </li>
-
-{% endif %}
     </div>
-
-    <!-- Adding a search form  -->
-    <div class="col-sm-4 col-md-4 navbar-right">
-
-      <form class="navbar-form" role="search" action="{% url 'search_projects' %}">
-
-        <div class="input-group">
-          <input type="text" style="font-family: 'Dosis', sans-serif;" class="form-control mr-sm-4" placeholder="Search Project" name="project">
-          <div class="input-group-btn">
-            <button class="btn btn-outline-primary my-2 my-sm-0" style="font-family: 'Dosis', sans-serif;" type="submit">Find</button>
-          </div>
-        </div>
-
-
-      </form>
-
-    </div>
-    <!-- search form end -->
-
-
-  </div>
+    {% endif %}  
 </nav>
+
