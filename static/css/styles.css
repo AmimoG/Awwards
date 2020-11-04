@@ -1,78 +1,38 @@
-h2 {
-    color:white;
-    margin-top:2%;
-    font-size:35px;
-    font-family: 'Times New Roman', Times, serif;
-    }
-    .boded{
-    background-image:url(/static/images/landing.jpeg);
-    padding-top:2%;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:cover;
-    }
-    /* .overlay{
-    margin:0;
-    padding:0;
-    background-color:rgba(49, 83, 15,0.3);
-    } */
-    .imagea{
-    margin-top:34%;
-    font-size:45px;
-    font-weight:bolder;
-    }
-    a{
-    text-decoration:none;
-    }
-    .image{
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom:18%;
-    
-    }
-    body{
-     scroll-behavior: smooth;
-    background-image:url(/static/images/landing.jpeg);
-    background-attachment:fixed;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:cover;
-    }
-    
-    .modalcard{
-    background-color:rgba(10,10,10,0.8);
-    color:white;
-    padding:3%;
-    border:none;
-    }
-    h3{
-    color:white;
-    font-family: 'Times New Roman', Times, serif;
-    }
-    #locations{
-    color:white;
-    font-family: Arial, Helvetica, sans-serif;
-    }
-    hr{
-    background:white;
-    height:2px;
-    }
-    #imageheader{
-    font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    .imgdesc{
-    font-family: Arial, Helvetica, sans-serif;
-    }
+a {
+  color: #003366;
+}
 
-    #found{
-    margin-bottom:3%;
-    }
-    #btn{
-    margin-right:6px;
-    }
-    .cat{
-    float:center;
-    background:gray;
-    padding:4px;
-    border-radius:6px;
-    }
+body {
+  background-color: white;
+}
+
+#victor {
+  font-family: 'Dosis', sans-serif;"
+  font-size: 30px;
+}
+
+li {
+  display: inline;
+}
+
+li a {
+  padding: 20px;
+}
+
+#footer1 li {
+  padding: 10px;
+  font-size: 10px;
+}
+
+.itson {
+  background-color: white;
+  height:auto;
+}
+
+#jumbo{
+height:200px !important;
+}
+
+.w-33 {
+    min-width: 33%;
+}

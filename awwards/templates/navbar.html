@@ -1,14 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-  <a class="navbar-brand text-white" href="/"><h3><strong>Nostalgia</strong></h3></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-      </ul>
-      <form class="form-inline my-2 my-md-0"  action="/search" role="search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search Pictures" name="imagesearch" aria-label="Search">
-        <button class="btn btn-info btn-md my-2 my-sm-0" type="submit">Search</button>
-      </form>
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
+
+<nav class="navbar bg-light ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'homePage' %}"><img src="https://png.icons8.com/linen/50/000000/rating.png" style="height:40px;width:36px;">
+      </a>
+
+      <a class="navbar-brand" id="victor" href="{% url 'homePage' %}">AWARDS
+      </a>
     </div>
-  </nav>
+    <div>
+        </div>
+    <div class="col-sm-6 col-md-6">
+      {% if user.is_authenticated %}
+
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a href="{%url 'edit_profile'%}">Edit Profile</a>
+      </li>
+
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a href="{% url 'individual_profile_page' user.id %}">My Profile</a>
+      </li>
+                   <li style="font-family: 'Dosis', sans-serif;">
+                    <a href="{%url 'new_project'%}">Submit Your Project</a>
+                  </li>
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a href="/accounts/password/change">Change Password</a>
+      </li>
+
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a href="/logout">Logout</a>
+      </li>
+
+      {% else %}
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a class='btn btn-default' href="/accounts/login">Login</a>
+      </li>
+
+      <li style="font-family: 'Dosis', sans-serif;">
+        <a class='btn btn-default' href="/accounts/register">Register</a>
+      </li>
+
+{% endif %}
+    </div>
+
+    <!-- Adding a search form  -->
+    <div class="col-sm-4 col-md-4 navbar-right">
+
+      <form class="navbar-form" role="search" action="{% url 'search_projects' %}">
+
+        <div class="input-group">
+          <input type="text" style="font-family: 'Dosis', sans-serif;" class="form-control mr-sm-4" placeholder="Search Project" name="project">
+          <div class="input-group-btn">
+            <button class="btn btn-outline-primary my-2 my-sm-0" style="font-family: 'Dosis', sans-serif;" type="submit">Find</button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+    <!-- search form end -->
+
+
+  </div>
+</nav>
