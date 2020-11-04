@@ -17,7 +17,7 @@ The project is created with:
 
 ## Installation
 * Clone the repository directly to your pc using this command
-    https://github.com/AmimoG/Awwards
+    https://awwards001.herokuapp.com/
 * To be able to run this project on your PC you need to have python already installed Python version 3.6 and above. Incase you dont have it use this commands to install
     $ sudo add-apt-repository ppa:jonathonf/python-3.6
     $ sudo apt-get update
@@ -39,9 +39,9 @@ Open your editor and run the cloned repository and install the modules below to 
 ## Setup
 To run this project, use the live link in the GitHub repo:
 The live link to the project is provided below.
-[https://awwardsamimo.herokuapp.com/]
+[https://awwards001.herokuapp.com/]
 
-https://awwardsamimo.herokuapp.com/
+https://awwards001.herokuapp.com/
 
 
 ## Contributing
